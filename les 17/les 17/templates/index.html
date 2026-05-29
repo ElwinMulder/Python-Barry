@@ -1,0 +1,75 @@
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Takenplanner</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        .klaar {
+            color: green;
+            text-decoration: line-through;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Takenplanner</h1>
+
+    <form method="post" action="/add">
+        <input
+            type="text"
+            name="titel"
+            placeholder="Nieuwe taak"
+            required
+        >
+
+        <button type="submit">
+            Toevoegen
+        </button>
+    </form>
+
+    <hr>
+
+    <ul>
+        {% for taak in taken %}
+
+            <li>
+
+                {% if taak.klaar %}
+                    <span class="klaar">
+                        ✅ {{ taak.titel }}
+                    </span>
+                {% else %}
+                    {{ taak.titel }}
+                {% endif %}
+
+                <a href="/done/{{ taak.id }}">
+                    Klaar
+                </a>
+
+                <a href="/delete/{{ taak.id }}">
+                    Verwijder
+                </a>
+
+            </li>
+
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
+```
